@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Taskify</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <h1 class="logo">Taskify</h1>
+      <p class="tagline">A short list, kept honestly.</p>
+    </header>
+
+    <main class="main">
+      <section class="composer" aria-label="Add a new task">
+        <form id="task-form" novalidate>
+          <div class="field">
+            <label for="title">What needs doing<span class="required">*</span></label>
+            <input type="text" id="title" name="title" placeholder="e.g. Reply to client email" maxlength="200" />
+            <p class="field-error" id="error-title"></p>
+          </div>
+
+          <div class="field">
+            <label for="description">Notes</label>
+            <textarea id="description" name="description" placeholder="Any extra detail..." rows="2" maxlength="2000"></textarea>
+            <p class="field-error" id="error-description"></p>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="dueDate">Due date</label>
+              <input type="date" id="dueDate" name="dueDate" />
+              <p class="field-error" id="error-dueDate"></p>
+            </div>
+
+            <div class="field">
+              <label for="priority">Priority</label>
+              <select id="priority" name="priority">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-footer">
+            <p class="form-message" id="form-message" role="status"></p>
+            <button type="submit" class="btn-primary" id="submit-btn">Add task</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="task-section" aria-label="Task list">
+        <div class="task-section-header">
+          <h2>Your tasks</h2>
+          <div class="filters" role="group" aria-label="Filter tasks">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="pending">Pending</button>
+            <button class="filter-btn" data-filter="completed">Done</button>
+          </div>
+        </div>
+
+        <ul class="task-list" id="task-list"></ul>
+
+        <div class="empty-state" id="empty-state" hidden>
+          <p class="empty-title">Nothing here yet.</p>
+          <p class="empty-sub">Add a task above to get started.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Edit modal -->
+  <div class="modal-overlay" id="modal-overlay" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <h2 id="modal-title">Edit task</h2>
+      <form id="edit-form" novalidate>
+        <input type="hidden" id="edit-id" />
+        <div class="field">
+          <label for="edit-title">What needs doing<span class="required">*</span></label>
+          <input type="text" id="edit-title" maxlength="200" />
+          <p class="field-error" id="edit-error-title"></p>
+        </div>
+        <div class="field">
+          <label for="edit-description">Notes</label>
+          <textarea id="edit-description" rows="2" maxlength="2000"></textarea>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="edit-dueDate">Due date</label>
+            <input type="date" id="edit-dueDate" />
+          </div>
+          <div class="field">
+            <label for="edit-priority">Priority</label>
+            <select id="edit-priority">
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+        </div>
+        <p class="form-message" id="edit-form-message" role="status"></p>
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" id="cancel-edit">Cancel</button>
+          <button type="submit" class="btn-primary">Save changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
